@@ -7,22 +7,7 @@ int connect_to_nn(char* address, int port)
 	assert(port >= 1 && port <= 65535);
 	//TODO: create a socket and connect it to the server (address, port)
 	//assign return value to client_socket 
-	int client_socket = -1;
-    if((client_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0){
-        printf("ERROR: could not create socket\n");
-        return -1;
-    }
-    else{
-        printf("SUCCESS: created socket\n");
-       struct sockaddr_in serv_addr;
-        serv_addr.sin_family = AF_INET;
-        serv_addr.sin_port = htons(port);
-        serv_addr.sin_addr.s_addr = inet_addr(address);
-        if(connect(client_socket, (struct sockaddr *)&serv_addr, sizeof(serv_addr))<0){
-             printf("ERROR: could not connect to server\n");
-            return -1;
-        }
-    }
+	int client_socket = create_client_tcp_socket(address, port);
     
 	return client_socket;
 }
