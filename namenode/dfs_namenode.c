@@ -22,6 +22,7 @@ int mainLoop(int server_socket)
 		unsigned int client_address_length = sizeof(client_address);
 		int client_socket = -1;
 		//TODO: accept the connection from the client and assign the return value to client_socket
+        client_socket = accept(server_socket, (struct sockaddr*)NULL ,NULL);
 
 		assert(client_socket != INVALID_SOCKET);
 
@@ -57,10 +58,13 @@ int start(int argc, char **argv)
 
 	//TODO:create a thread to handle heartbeat service
 	//you can implement the related function in dfs_common.c and call it here
-
+//    create_thread(heartbeatService, NULL);
+    
+    
 	int server_socket = INVALID_SOCKET;
 	//TODO: create a socket to listen the client requests and replace the value of server_socket with the socket's fd
-
+    server_socket = create_server_tcp_socket(50070);
+    
 	assert(server_socket != INVALID_SOCKET);
 	return mainLoop(server_socket);
 }
@@ -113,7 +117,7 @@ int get_file_receivers(int client_socket, dfs_cm_client_req_t request)
 		if (file_image == end_file_image) return 1;
 		// Create the file entry
 		*file_image = (dfs_cm_file_t*)malloc(sizeof(dfs_cm_file_t));
-		memset(*file_image, 0, sizeof(*file_image));
+		memset(*file_image, 0, sizeof(**file_image));
 		strcpy((*file_image)->filename, request.file_name);
 		(*file_image)->file_size = request.file_size;
 		(*file_image)->blocknum = 0;

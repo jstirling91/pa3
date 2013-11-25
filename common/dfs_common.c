@@ -10,7 +10,14 @@ inline pthread_t * create_thread(void * (*entry_point)(void*), void *args)
 {
 	//TODO: create the thread and run it
 	pthread_t * thread;
-
+    thread = (pthread_t *)malloc(sizeof(pthread_t));
+    int rc = pthread_create(thread, NULL, entry_point, args);
+    if(rc){
+        printf("ERROR: threated not created\n");
+    }
+    else{
+        printf("SUCCESS: thread created\n");
+    }
 	return thread;
 }
 
@@ -37,7 +44,7 @@ int create_client_tcp_socket(char* address, int port)
 	assert(port >= 0 && port < 65536);
 	int socket = create_tcp_socket();
 	if (socket == INVALID_SOCKET) return 1;
-    printf("SUCCESS: created socket\n");
+    printf("SUCCESS: created client socket\n");
     struct sockaddr_in serv_addr;
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(port);
@@ -59,6 +66,17 @@ int create_server_tcp_socket(int port)
 	int socket = create_tcp_socket();
 	if (socket == INVALID_SOCKET) return 1;
 	//TODO: listen on local port
+    printf("SUCCESS: created server socket\n");
+    struct sockaddr_in serv_addr;
+    serv_addr.sin_family = AF_INET;
+    serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
+    serv_addr.sin_port = htons(port);
+    bind(socket, (struct sockaddr*)&serv_addr,sizeof(serv_addr));
+    if(listen(socket, 10) == -1){
+        printf("Failed to listen\n");
+        return -1;
+    }
+    printf("SUCCESS: listening for client\n");
 	return socket;
 }
 
