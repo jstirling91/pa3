@@ -88,7 +88,7 @@ dfs_system_status *get_system_info(int namenode_socket)
 	dfs_system_status *response;
     data = (char*)malloc(sizeof(struct dfs_system_status));
     receive_data(namenode_socket, (void *)data, sizeof(struct dfs_system_status));
-    memcpy(&response, data, sizeof(struct dfs_system_status));
+    memcpy(&response, data, sizeof(struct _system_descriptor_));
     
     
     printf("SUCCESS: got system_status response %d\n", response->datanode_num);
