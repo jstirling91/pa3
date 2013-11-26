@@ -116,6 +116,8 @@ void receive_data(int socket, void* data, int size)
         if (result < 1 )
         {
             // Throw your error.
+            printf("ERROR: did not read\n");
+            break;
         }
         
         bytesRead += result;
