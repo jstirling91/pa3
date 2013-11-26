@@ -72,7 +72,8 @@ int start(int argc, char **argv)
 	strcpy(working_directory, argv[4]);
 	//start one thread to report to the namenode periodically
 	//TODO: start a thread to report heartbeat
-
+    creat_thread(heartbeat, NULL);
+    
 	return mainLoop();
 }
 
