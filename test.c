@@ -8,9 +8,9 @@ int test_case_0(char **argv, int op_type)
 {
 	dfs_system_status *sys_stat = NULL;
 	if ((sys_stat = send_sysinfo_request(argv)) == NULL) return 1;
-    printf("HERE\n");
 	if (sys_stat->datanode_num == 2) 
 	{
+        printf("HERE\n");
 		free(sys_stat);
 		return 0;
 	}
