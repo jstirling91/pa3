@@ -168,6 +168,7 @@ void get_system_information(int client_socket, dfs_cm_client_req_t request)
     char *data = (char*)malloc(sizeof(response));
     memcpy(data, &response, sizeof(response));
     send_data(client_socket, data, sizeof(response));
+    free(data);
 }
 
 int get_file_update_point(int client_socket, dfs_cm_client_req_t request)
