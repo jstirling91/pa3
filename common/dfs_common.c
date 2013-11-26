@@ -99,6 +99,7 @@ void send_data(int socket, void* data, int size)
             printf("ERROR: did not send\n");
             return;
         }
+        bytesWrite += result;
     }
     
 }
