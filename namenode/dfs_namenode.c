@@ -170,7 +170,7 @@ void get_system_information(int client_socket, dfs_cm_client_req_t request)
     response.datanode_num = 2;
 //    char *data = (char*)malloc(sizeof(dfs_system_status));
 //    memcpy(, sizeof(dfs_system_status));
-    char[13] string = "Hello World";
+    char string[13] = "Hello World";
     send_data(client_socket, &string, sizeof(dfs_system_status));
 //    free(data);
 }
