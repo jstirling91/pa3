@@ -50,10 +50,10 @@ int create_client_tcp_socket(char* address, int port)
     serv_addr.sin_port = htons(port);
     serv_addr.sin_addr.s_addr = inet_addr(address);
     if(connect(socket, (struct sockaddr *)&serv_addr, sizeof(serv_addr))<0){
-        printf("ERROR: could not connect to server\n");
+        printf("ERROR: could not connect to server at port %d\n", port);
         return -1;
     }
-    printf("SUCCESS: connected to server\n");
+    printf("SUCCESS: connected to server WITH PORT: %d\n", port);
 	return socket;
 }
 
@@ -91,6 +91,7 @@ void send_data(int socket, void* data, int size)
 	assert(size >= 0);
 	if (socket == INVALID_SOCKET) return;
 	//TODO: send data through socket
+    write(socket, data, size);
 }
 
 /**
@@ -101,8 +102,22 @@ void send_data(int socket, void* data, int size)
  */
 void receive_data(int socket, void* data, int size)
 {
-	assert(data != NULL);
+//    printf("Size of data: %d\n", socket);
+//	assert(data != NULL);
 	assert(size >= 0);
 	if (socket == INVALID_SOCKET) return;
 	//TODO: fetch data via socket
+    int bytesRead = 0;
+    int result;
+    while (bytesRead < size)
+    {
+        result = read(socket, data + bytesRead, size - bytesRead);
+        if (result < 1 )
+        {
+            // Throw your error.
+        }
+        
+        bytesRead += result;
+    }
+    printf("Size of data: %s\n", data);
 }

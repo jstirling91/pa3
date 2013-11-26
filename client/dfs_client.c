@@ -76,9 +76,22 @@ dfs_system_status *get_system_info(int namenode_socket)
 	assert(namenode_socket != INVALID_SOCKET);
 	//TODO fill the result and send 
 	dfs_cm_client_req_t request;
-	
+    request.req_type = 2;
+    printf("SIZE OF: %d\n", namenode_socket);
+    char *data = (char*)malloc(sizeof(request));
+    memcpy(data, &request, sizeof(request));
+    send_data(namenode_socket, (void *)data, sizeof(request));
+	free(data);
+    printf("SUCCESS: request was sent\n");
+    
 	//TODO: get the response
-	dfs_system_status *response; 
+	dfs_system_status *response;
+    data = (char*)malloc(sizeof(request));
+    receive_data(namenode_socket, data, sizeof(request));
+    memcpy(&response, data, sizeof(response));
+    
+    
+    printf("SUCCESS: got system_status response\n");
 
 	return response;		
 }

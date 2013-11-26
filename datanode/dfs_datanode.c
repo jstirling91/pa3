@@ -15,6 +15,7 @@ int mainLoop()
 	//we don't consider concurrent operations in this assignment
 	int server_socket = -1;
 	//TODO: create a server socket and listen on it, you can implement dfs_common.c and call it here
+    server_socket = create_server_tcp_socket(datanode_listen_port);
 
 	assert (server_socket != INVALID_SOCKET);
 
@@ -24,6 +25,7 @@ int mainLoop()
 		sockaddr_in client_address;
 		int client_socket = -1;
 		//TODO: accept the client request
+        client_socket = accept(server_socket, (struct sockaddr*)NULL ,NULL);
 		assert(client_socket != INVALID_SOCKET);
 		dfs_cli_dn_req_t request;
 		//TODO: receive data from client_socket, and fill it to request

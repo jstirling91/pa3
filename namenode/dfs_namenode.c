@@ -28,6 +28,10 @@ int mainLoop(int server_socket)
 
 		dfs_cm_client_req_t request;
 		//TODO: receive requests from client and fill it in request
+        char *data = (char *)malloc(sizeof(request));
+//        char data[300];
+        receive_data(client_socket, (void *)data, sizeof(request));
+        memcpy(&request, data, sizeof(request));
 
 		requests_dispatcher(client_socket, request);
 		close(client_socket);
@@ -160,6 +164,9 @@ void get_system_information(int client_socket, dfs_cm_client_req_t request)
 	assert(client_socket != INVALID_SOCKET);
 	//TODO:fill the response and send back to the client
 	dfs_system_status response;
+    char *data = (char*)malloc(sizeof(response));
+    memcpy(data, &response, sizeof(response));
+    send_data(client_socket, data, sizeof(response));
 }
 
 int get_file_update_point(int client_socket, dfs_cm_client_req_t request)
