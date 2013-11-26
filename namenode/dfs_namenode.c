@@ -68,7 +68,7 @@ int start(int argc, char **argv)
 	int server_socket = INVALID_SOCKET;
 	//TODO: create a socket to listen the client requests and replace the value of server_socket with the socket's fd
     server_socket = create_server_tcp_socket(50070);
-    
+    dncnt = 0;
 	assert(server_socket != INVALID_SOCKET);
 	return mainLoop(server_socket);
 }
@@ -83,11 +83,13 @@ int register_datanode(int heartbeat_socket)
 		assert(datanode_socket != INVALID_SOCKET);
 		dfs_cm_datanode_status_t datanode_status;
 		//TODO: receive datanode's status via datanode_socket
-
-		if (datanode_status.datanode_id < MAX_DATANODE_NUM)
+        int n;
+		if ((n = datanode_status.datanode_id) < MAX_DATANODE_NUM)
 		{
 			//TODO: fill dnlist
 			//principle: a datanode with id of n should be filled in dnlist[n - 1] (n is always larger than 0)
+            dncnt++;
+//            dnlist[n - 1] = 
 			safeMode = 0;
 		}
 		close(datanode_socket);
@@ -165,6 +167,7 @@ void get_system_information(int client_socket, dfs_cm_client_req_t request)
 	assert(client_socket != INVALID_SOCKET);
 	//TODO:fill the response and send back to the client
 	dfs_system_status response;
+    response.datanode_num = dncnt;
     char *data = (char*)malloc(sizeof(response));
     memcpy(data, &response, sizeof(response));
     send_data(client_socket, data, sizeof(response));
