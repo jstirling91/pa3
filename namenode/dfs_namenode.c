@@ -168,9 +168,9 @@ void get_system_information(int client_socket, dfs_cm_client_req_t request)
 	//TODO:fill the response and send back to the client
 	dfs_system_status response;
     response.datanode_num = 2;
-    char *data = (char*)malloc(sizeof(response));
-    memcpy(data, &response, sizeof(response));
-    send_data(client_socket, (void *)data, sizeof(response));
+    char *data = (char*)malloc(sizeof(struct dfs_system_status));
+    memcpy(data, &response, sizeof(struct dfs_system_status));
+    send_data(client_socket, (void *)data, sizeof(struct dfs_system_status));
     free(data);
 }
 
