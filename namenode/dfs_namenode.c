@@ -169,7 +169,7 @@ void get_system_information(int client_socket, dfs_cm_client_req_t request)
 	dfs_system_status response;
     response.datanode_num = 2;
     char *data = (char*)malloc(sizeof(dfs_system_status));
-    memcpy(data, &response, sizeof(dfs_system_status));
+    memcpy(&response, data, sizeof(dfs_system_status));
     send_data(client_socket, (void *)data, sizeof(dfs_system_status));
     free(data);
 }
