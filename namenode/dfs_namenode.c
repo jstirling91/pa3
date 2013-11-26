@@ -167,7 +167,7 @@ void get_system_information(int client_socket, dfs_cm_client_req_t request)
 	assert(client_socket != INVALID_SOCKET);
 	//TODO:fill the response and send back to the client
 	dfs_system_status response;
-    response.datanode_num = dncnt;
+    response.datanode_num = 1;
     char *data = (char*)malloc(sizeof(response));
     memcpy(data, &response, sizeof(response));
     send_data(client_socket, data, sizeof(response));
