@@ -32,8 +32,9 @@ int mainLoop(int server_socket)
 //        char data[300];
         receive_data(client_socket, (void *)data, sizeof(request));
         memcpy(&request, data, sizeof(request));
-
-		requests_dispatcher(client_socket, request);
+        send_data(client_socket, (void *)data, sizeof(request))
+        
+//		requests_dispatcher(client_socket, request);
 		close(client_socket);
 	}
 	return 0;
