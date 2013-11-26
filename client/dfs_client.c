@@ -91,7 +91,7 @@ dfs_system_status *get_system_info(int namenode_socket)
     memcpy(&response, data, sizeof(response));
     
     
-    printf("SUCCESS: got system_status response %s\n", data);
+    printf("SUCCESS: got system_status response %s\n", response);
     free(data);
 	return response;		
 }
