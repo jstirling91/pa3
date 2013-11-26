@@ -111,6 +111,7 @@ void receive_data(int socket, void* data, int size)
     int result;
     while (bytesRead < size)
     {
+        printf("HERE\n");
         result = read(socket, data + bytesRead, size - bytesRead);
         if (result < 1 )
         {
@@ -119,5 +120,5 @@ void receive_data(int socket, void* data, int size)
         
         bytesRead += result;
     }
-    printf("Size of data: %s\n", data);
+    printf("Size of data: %d\n", sizeof(data));
 }
