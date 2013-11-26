@@ -89,7 +89,7 @@ dfs_system_status *get_system_info(int namenode_socket)
     char *string;
 //    data = (char*)malloc(sizeof(dfs_system_status));
 //    receive_data(namenode_socket, response, sizeof(dfs_system_status));
-    receive_data(namenode_socket, response, 13);
+    receive_data(namenode_socket, string, 13);
 //    memcpy(&response, data, sizeof(dfs_system_status));
     
     
