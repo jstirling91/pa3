@@ -62,7 +62,7 @@ int start(int argc, char **argv)
 
 	//TODO:create a thread to handle heartbeat service
 	//you can implement the related function in dfs_common.c and call it here
-//    create_thread(heartbeatService, NULL);
+    create_thread(heartbeatService, NULL);
     
     
 	int server_socket = INVALID_SOCKET;
@@ -79,6 +79,7 @@ int register_datanode(int heartbeat_socket)
 	{
 		int datanode_socket = -1;
 		//TODO: accept connection from DataNodes and assign return value to datanode_socket;
+        datanode_socket = accept(heartbeat_socket, (struct sockaddr*)NULL ,NULL);
 		assert(datanode_socket != INVALID_SOCKET);
 		dfs_cm_datanode_status_t datanode_status;
 		//TODO: receive datanode's status via datanode_socket

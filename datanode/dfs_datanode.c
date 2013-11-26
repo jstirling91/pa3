@@ -46,8 +46,10 @@ static void *heartbeat()
 	{
 		int heartbeat_socket = -1;
 		//TODO: create a socket to the namenode, assign file descriptor id to heartbeat_socket
+        heartbeat_socket = create_client_tcp_socket("127.0.0.1", 50030);
 		assert(heartbeat_socket != INVALID_SOCKET);
 		//send datanode_status to namenode
+        
 		close(heartbeat_socket);
 		sleep(HEARTBEAT_INTERVAL);
 	}
