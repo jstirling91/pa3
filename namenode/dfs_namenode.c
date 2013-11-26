@@ -32,9 +32,8 @@ int mainLoop(int server_socket)
 //        char data[300];
         receive_data(client_socket, (void *)data, sizeof(request));
         memcpy(&request, data, sizeof(request));
-        send_data(client_socket, (void *)data, sizeof(request));
         
-//		requests_dispatcher(client_socket, request);
+		requests_dispatcher(client_socket, request);
 		close(client_socket);
 	}
 	return 0;
@@ -171,7 +170,7 @@ void get_system_information(int client_socket, dfs_cm_client_req_t request)
     response.datanode_num = 2;
     char *data = (char*)malloc(sizeof(response));
     memcpy(data, &response, sizeof(response));
-    send_data(client_socket, data, sizeof(response));
+    send_data(client_socket, (void *)data, sizeof(response));
     free(data);
 }
 
