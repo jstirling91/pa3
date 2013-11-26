@@ -122,5 +122,5 @@ void receive_data(int socket, void* data, int size)
         
         bytesRead += result;
     }
-    printf("Size of data: %d\n", sizeof(data));
+    printf("Size of data: %d\n", size);
 }
