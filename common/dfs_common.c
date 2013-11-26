@@ -91,7 +91,16 @@ void send_data(int socket, void* data, int size)
 	assert(size >= 0);
 	if (socket == INVALID_SOCKET) return;
 	//TODO: send data through socket
-    write(socket, data, size);
+    int bytesWrite = 0;
+    int result;
+    while(bytesWrite < size){
+        result = write(socket, data + bytesWrite, size - bytesWrite);
+        if(reuslts < 1){
+            printf("ERROR: did not send\n");
+            return;
+        }
+    }
+    
 }
 
 /**
@@ -117,7 +126,7 @@ void receive_data(int socket, void* data, int size)
         {
             // Throw your error.
             printf("ERROR: did not read\n");
-            break;
+            return;
         }
         
         bytesRead += result;
