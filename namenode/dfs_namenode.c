@@ -79,8 +79,12 @@ int register_datanode(int heartbeat_socket)
 	{
 		int datanode_socket = -1;
 		//TODO: accept connection from DataNodes and assign return value to datanode_socket;
-        sockaddr_in addr;
-        datanode_socket = accept(heartbeat_socket, (struct sockaddr *)&addr ,sizeof(addr));
+        sockaddr_in serv_addr;
+        memset(&serv_addr, '0', sizeof(serv_addr));
+        
+        serv_addr.sin_family = AF_INET;
+        serv_addr.sin_port = htons(50030);
+        datanode_socket = accept(heartbeat_socket, (struct sockaddr *)&serv_addr ,sizeof(serv_addr));
 		assert(datanode_socket != INVALID_SOCKET);
 		dfs_cm_datanode_status_t datanode_status;
 		//TODO: receive datanode's status via datanode_socket
@@ -93,7 +97,7 @@ int register_datanode(int heartbeat_socket)
             printf("HERE\n");
             dfs_datanode_t dnode;
             dnode.dn_id = n;
-            strcpy(dnode.ip, inet_ntoa(addr.sin_addr));
+            strcpy(dnode.ip, inet_ntoa(serv_addr.sin_addr));
 //            dnode.ip = *inet_ntoa(addr.sin_addr);
             dnode.port = datanode_status.datanode_listen_port;
             dncnt++;
