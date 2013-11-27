@@ -81,6 +81,7 @@ int register_datanode(int heartbeat_socket)
 		//TODO: accept connection from DataNodes and assign return value to datanode_socket;
         sockaddr_in serv_addr;
         datanode_socket = accept(heartbeat_socket, (struct sockaddr *)NULL ,NULL);
+		dfs_cm_datanode_status_t datanode_status;
 		//TODO: receive datanode's status via datanode_socket
         receive_data(datanode_socket, &datanode_status, sizeof(datanode_status));
         int n;
