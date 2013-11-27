@@ -95,7 +95,7 @@ dfs_system_status *get_system_info(int namenode_socket)
     
     printf("SUCCESS: got system_status response %d\n", response.datanode_num);
 //    free(data);
-	return response;
+	return &response;
 }
 
 int send_file_request(char **argv, char *filename, int op_type)
