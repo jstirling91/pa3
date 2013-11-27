@@ -85,10 +85,10 @@ dfs_system_status *get_system_info(int namenode_socket)
     printf("SUCCESS: request was sent\n");
     
 	//TODO: get the response
-	dfs_system_status *response = malloc(sizeof(dfs_system_status));
+	dfs_system_status response;
 //    char *string = (char *)malloc(13);
 //    data = (char*)malloc(sizeof(dfs_system_status));
-    receive_data(namenode_socket, response, sizeof(dfs_system_status));
+    receive_data(namenode_socket, &response, sizeof(dfs_system_status));
 //    receive_data(namenode_socket, string, 13);
 //    memcpy(&response, data, sizeof(dfs_system_status));
     
