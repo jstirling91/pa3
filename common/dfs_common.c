@@ -93,15 +93,15 @@ void send_data(int socket, void* data, int size)
 	//TODO: send data through socket
     int bytesWrite = 0;
     int result;
-//    while(bytesWrite < size){
+    while(bytesWrite < size){
         result = write(socket, data + bytesWrite, size);
         if(result < 1){
             printf("ERROR: did not send\n");
             return;
         }
         bytesWrite += result;
-//    }
-    
+    }
+
 }
 
 /**
@@ -121,12 +121,11 @@ void receive_data(int socket, void* data, int size)
     int result;
     while (bytesRead < size)
     {
-        printf("HERE\n");
         result = read(socket, data + bytesRead, size);
         if (result < 1 )
         {
             // Throw your error.
-            printf("ERROR: did not read\n");
+            printf("ERROR: did not read socket %d\n", socket);
             return;
         }
         
