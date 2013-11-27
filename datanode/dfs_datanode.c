@@ -49,7 +49,7 @@ static void *heartbeat()
         heartbeat_socket = create_client_tcp_socket("127.0.0.1", 50030);
 		assert(heartbeat_socket != INVALID_SOCKET);
 		//send datanode_status to namenode
-        
+        send_data(heartbeat_socket, &datanode_status, sizeof(datanode_status));
 		close(heartbeat_socket);
 		sleep(HEARTBEAT_INTERVAL);
 	}
