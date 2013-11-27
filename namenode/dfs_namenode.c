@@ -80,7 +80,7 @@ int register_datanode(int heartbeat_socket)
 		int datanode_socket = -1;
 		//TODO: accept connection from DataNodes and assign return value to datanode_socket;
         sockaddr_in addr;
-        datanode_socket = accept(heartbeat_socket, (struct sockaddr*)&addr ,sizeof(addr));
+        datanode_socket = accept(heartbeat_socket, (struct sockaddr *)&addr ,sizeof(addr));
 		assert(datanode_socket != INVALID_SOCKET);
 		dfs_cm_datanode_status_t datanode_status;
 		//TODO: receive datanode's status via datanode_socket
