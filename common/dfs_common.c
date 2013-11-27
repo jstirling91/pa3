@@ -101,6 +101,7 @@ void send_data(int socket, void* data, int size)
         }
         bytesWrite += result;
     }
+    printf("HERE\n");
     printf("SUCCESS: data was sent %s\n", data);
 
 }
@@ -132,5 +133,5 @@ void receive_data(int socket, void* data, int size)
         
         bytesRead += result;
     }
-    printf("Size of data: %d\n", sizeof(data));
+    printf("Size of data: %d\n", socket);
 }
