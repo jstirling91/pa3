@@ -93,14 +93,14 @@ void send_data(int socket, void* data, int size)
 	//TODO: send data through socket
     int bytesWrite = 0;
     int result;
-    while(bytesWrite < size){
+//    while(bytesWrite < size){
         result = write(socket, data + bytesWrite, size);
         if(result < 1){
             printf("ERROR: did not send\n");
             return;
         }
         bytesWrite += result;
-    }
+//    }
     
 }
 
