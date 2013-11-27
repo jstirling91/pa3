@@ -93,7 +93,7 @@ dfs_system_status *get_system_info(int namenode_socket)
 //    memcpy(&response, data, sizeof(dfs_system_status));
     
     
-    printf("SUCCESS: got system_status response %s\n", response->datanode_num);
+    printf("SUCCESS: got system_status response %s\n", response.datanode_num);
 //    free(data);
 	return response;
 }
