@@ -101,7 +101,7 @@ void send_data(int socket, void* data, int size)
         }
         bytesWrite += result;
     }
-    printf("HERE\n");
+    printf("HERE %d %d\n", size, bytesWrite);
     printf("SUCCESS: data was sent %s\n", data);
 
 }
