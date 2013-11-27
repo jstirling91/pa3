@@ -90,6 +90,7 @@ int register_datanode(int heartbeat_socket)
 		{
 			//TODO: fill dnlist
 			//principle: a datanode with id of n should be filled in dnlist[n - 1] (n is always larger than 0)
+            printf("HERE\n");
             dfs_datanode_t dnode;
             dnode.dn_id = n;
             strcpy(dnode.ip, inet_ntoa(addr.sin_addr));
