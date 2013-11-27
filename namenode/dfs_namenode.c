@@ -84,7 +84,7 @@ int register_datanode(int heartbeat_socket)
         
         serv_addr.sin_family = AF_INET;
         serv_addr.sin_port = htons(50030);
-        datanode_socket = accept(heartbeat_socket, (struct sockaddr *)&serv_addr ,sizeof(serv_addr));
+        datanode_socket = accept(heartbeat_socket, (struct sockaddr *)NULL ,NULL);
 		assert(datanode_socket != INVALID_SOCKET);
 		dfs_cm_datanode_status_t datanode_status;
 		//TODO: receive datanode's status via datanode_socket
