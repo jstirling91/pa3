@@ -83,13 +83,18 @@ int register_datanode(int heartbeat_socket)
 		assert(datanode_socket != INVALID_SOCKET);
 		dfs_cm_datanode_status_t datanode_status;
 		//TODO: receive datanode's status via datanode_socket
+        receive_data(datanode_socket, &datanode_status, sizeof(datanode_status));
         int n;
 		if ((n = datanode_status.datanode_id) < MAX_DATANODE_NUM)
 		{
 			//TODO: fill dnlist
 			//principle: a datanode with id of n should be filled in dnlist[n - 1] (n is always larger than 0)
+            dfs_datanode_t dnode;
+            dnode.dn_id = n;
+            dnode.ip = inet_ntoa(addr.sin_addr);
+            dnode.port = datanode_status.datanode_listen_port;
             dncnt++;
-//            dnlist[n - 1] = 
+            dnlist[n - 1] = &dnode;
 			safeMode = 0;
 		}
 		close(datanode_socket);
@@ -167,8 +172,11 @@ void get_system_information(int client_socket, dfs_cm_client_req_t request)
 	assert(client_socket != INVALID_SOCKET);
 	//TODO:fill the response and send back to the client
 	dfs_system_status response;
-    response.datanode_num = 2;
-    printf("WTF %d\n", response.datanode_num);
+    response.datanode_num = dncnt;
+    int i;
+    for(i = 0; i < dncnt; i++){
+        response.datanodes[i] = *(dnlist[i]);
+    }
 //    char *data = (char*)malloc(sizeof(dfs_system_status));
 //    memcpy(, sizeof(dfs_system_status));
 //    char string[13] = "Hello World";
