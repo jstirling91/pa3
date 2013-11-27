@@ -168,6 +168,7 @@ void get_system_information(int client_socket, dfs_cm_client_req_t request)
 	//TODO:fill the response and send back to the client
 	dfs_system_status response;
     response.datanode_num = 2;
+    printf("WTF %d\n", response.datanode_num);
 //    char *data = (char*)malloc(sizeof(dfs_system_status));
 //    memcpy(, sizeof(dfs_system_status));
 //    char string[13] = "Hello World";
