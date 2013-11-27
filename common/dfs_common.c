@@ -101,6 +101,7 @@ void send_data(int socket, void* data, int size)
         }
         bytesWrite += result;
     }
+    printf("SUCCESS: data was sent %s\n", data);
 
 }
 
