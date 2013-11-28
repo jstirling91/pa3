@@ -42,7 +42,7 @@ int push_file(int namenode_socket, const char* local_path)
 	dfs_cm_client_req_t request;
     
 	//TODO:fill the fields in request and
-    request.req_type = 2;
+    request.req_type = 1;
     memcpy(request.file_name, local_path, sizeof(request.file_name));
     fseek(file, 0, SEEK_END);
     int size = ftell(file);
