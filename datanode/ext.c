@@ -41,7 +41,7 @@ int ext_write_block(const char *filename, int block_id, void *buf)
 	else block_id_len = 2;
 	fullpath = (char *) malloc(sizeof(char) * (strlen(working_directory) + strlen(filename) + block_id_len + 7));
 	get_block_file_path(fullpath, filename, block_id);
-	block_file_ptr = fopen("d1/local_file_blk_0", "wb");
+	block_file_ptr = fopen(fullpath, "wb");
 	ret = fwrite(buf, DFS_BLOCK_SIZE, 1, block_file_ptr);
 	printf("write successfully on %s\n", fullpath);
 	fclose(block_file_ptr);
