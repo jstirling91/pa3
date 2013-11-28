@@ -24,10 +24,10 @@ int test_case_1(char **argv, int op_type)
 		return 1;
 	}
 	int ret = 0;
-    printf("here\n");
 	char * str_arr[1];
 	char *blk_0 = "d1/local_file_blk_0";
 	FILE *local_fp = fopen("local_file", "rb");
+    printf("here\n");
 	char *local_buf = (char *) malloc(sizeof(char) * DFS_BLOCK_SIZE);
 	char *buf = (char *) malloc(sizeof(char) * DFS_BLOCK_SIZE);
 	sleep(5);
