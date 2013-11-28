@@ -32,7 +32,7 @@ int mainLoop(int server_socket)
 //        char data[300];
         printf("Attempting to recieve data\n");
         receive_data(client_socket, &request, sizeof(request));
-        printf("Data received\n");
+        printf("Data received %d\n", request.req_type);
 //        memcpy(&request, data, sizeof(request));
         
 		requests_dispatcher(client_socket, request);
