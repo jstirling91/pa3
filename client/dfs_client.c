@@ -21,11 +21,38 @@ int modify_file(char *ip, int port, const char* filename, int file_size, int sta
 
 	//TODO:fill the request and send
 	dfs_cm_client_req_t request;
+    request.req_type = 3;
+    send_data(namenode_socket, &request, sizeof(request));
+    
 	
 	//TODO: receive the response
 	dfs_cm_file_res_t response;
+    receive_data(namenode_socket, &response, sizeof(response));
+    
 
 	//TODO: send the updated block to the proper datanode
+    int startBlock = start_addr / DFS_BLOCK_SIZE;
+    int endBlock;
+    int dataSocket;
+    if(file_size == response.query_result.file_size){
+        endBlock = end_addr / DFS_BLOCK_SIZE;
+    }
+    else{
+        endBlock = = response.query_result.blocknum;
+    }
+    for(startBlock; startBlock < endBlock; startBlock++){
+        dfs_cli_dn_req_t dataReq;
+        dataReq.op_type = 1;
+        memcpy(&dataReq.block, &response.query_result.block_list[startBlock], sizeof(response.query_result.block_list[i]));
+        //        char *temp = malloc(DFS_BLOCK_SIZE);
+        fread(&dataReq.block.content, DFS_BLOCK_SIZE, 1, file);
+        //        memcpy(&dataReq.block.content, temp, sizeof(temp));
+        dataSocket = connect_to_nn(dataReq.block.loc_ip, dataReq.block.loc_port);
+        send_data(dataSocket, &dataReq, sizeof(dataReq));
+        close(dataSocket);
+    }
+    
+    
 
 	fclose(file);
 	return 0;
@@ -68,6 +95,7 @@ int push_file(int namenode_socket, const char* local_path)
 //        memcpy(&dataReq.block.content, temp, sizeof(temp));
         dataSocket = connect_to_nn(dataReq.block.loc_ip, dataReq.block.loc_port);
         send_data(dataSocket, &dataReq, sizeof(dataReq));
+        close(dataSocket);
     }
     printf("SUCCESS: push_file data was sent\n");
 
@@ -110,6 +138,7 @@ int pull_file(int namenode_socket, const char *filename)
         receive_data(dataSocket, &dataRes, sizeof(dfs_cm_block_t));
         memcpy(buf + cursor, &dataRes.content, DFS_BLOCK_SIZE);
         cursor += DFS_BLOCK_SIZE;
+        close(dataSocket);
     }
 	
 	FILE *file = fopen(filename, "wb");
