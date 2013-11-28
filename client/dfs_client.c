@@ -46,9 +46,7 @@ int modify_file(char *ip, int port, const char* filename, int file_size, int sta
         dfs_cli_dn_req_t dataReq;
         dataReq.op_type = 1;
         memcpy(&dataReq.block, &response.query_result.block_list[startBlock], sizeof(dfs_cli_dn_req_t));
-        //        char *temp = malloc(DFS_BLOCK_SIZE);
         fread(&dataReq.block.content, DFS_BLOCK_SIZE, 1, file);
-        //        memcpy(&dataReq.block.content, temp, sizeof(temp));
         dataSocket = connect_to_nn(dataReq.block.loc_ip, dataReq.block.loc_port);
         send_data(dataSocket, &dataReq, sizeof(dataReq));
         close(dataSocket);
@@ -92,9 +90,7 @@ int push_file(int namenode_socket, const char* local_path)
         dfs_cli_dn_req_t dataReq;
         dataReq.op_type = 1;
         memcpy(&dataReq.block, &response.query_result.block_list[i], sizeof(response.query_result.block_list[i]));
-//        char *temp = malloc(DFS_BLOCK_SIZE);
         fread(&dataReq.block.content, DFS_BLOCK_SIZE, 1, file);
-//        memcpy(&dataReq.block.content, temp, sizeof(temp));
         dataSocket = connect_to_nn(dataReq.block.loc_ip, dataReq.block.loc_port);
         send_data(dataSocket, &dataReq, sizeof(dataReq));
         close(dataSocket);

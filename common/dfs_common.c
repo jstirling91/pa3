@@ -114,7 +114,6 @@ void send_data(int socket, void* data, int size)
  */
 void receive_data(int socket, void* data, int size)
 {
-//    printf("Size of data: %d\n", socket);
 //	assert(data != NULL);
 	assert(size >= 0);
 	if (socket == INVALID_SOCKET) return;
