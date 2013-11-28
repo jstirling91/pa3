@@ -99,6 +99,9 @@ int register_datanode(int heartbeat_socket)
                 dnode.port = datanode_status.datanode_listen_port;
                 dncnt++;
                 dnlist[n - 1] = &dnode;
+                if(n == 2){
+                    printf("PORT1: %d, %d\n", dnlist[n - 1]->port, dnlist[0]->port);
+                }
                 printf("PORT: %d, %d\n", dnlist[n - 1]->port, n);
                 safeMode = 0;
             }
