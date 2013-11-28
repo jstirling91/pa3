@@ -46,7 +46,7 @@ int push_file(int namenode_socket, const char* local_path)
     memcpy(request.file_name, local_path, sizeof(request.file_name));
     fseek(file, 0, SEEK_END);
     int size = ftell(file);
-    fseek(file, SEEK_SET, 0);
+    rewind(file);
     request.file_size = size;
     send_data(namenode_socket, &request, sizeof(request));
     printf("SUCCESS: push_file request was sent\n");
