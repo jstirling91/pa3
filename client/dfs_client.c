@@ -67,7 +67,7 @@ int push_file(int namenode_socket, const char* local_path)
         fread(temp, DFS_BLOCK_SIZE, 1, file);
         memcpy(&dataReq.block.content, temp, sizeof(temp));
         dataSocket = connect_to_nn(dataReq.block.loc_ip, dataReq.block.loc_port);
-        printf("%s %d\n", rdataReq.owner_name, dataReq.block_id);
+        printf("%s %d\n", dataReq.block.owner_name, dataReq.block.block_id);
         send_data(dataSocket, &dataReq, sizeof(dataReq));
     }
     printf("SUCCESS: push_file data was sent\n");
