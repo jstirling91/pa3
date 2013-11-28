@@ -93,7 +93,7 @@ int register_datanode(int heartbeat_socket)
 			//principle: a datanode with id of n should be filled in dnlist[n - 1] (n is always larger than 0)
             
             if(dnlist[n - 1] == NULL){
-                dfs_datanode_t *dnode;
+                dfs_datanode_t *dnode = malloc(sizeof(dfs_datanode_t));
                 dnode->dn_id = n;
                 memcpy(&dnode->ip, inet_ntoa(serv_addr.sin_addr), 16*sizeof(char));
 //                //            dnode.ip = *inet_ntoa(addr.sin_addr);
