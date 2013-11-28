@@ -154,7 +154,7 @@ int get_file_receivers(int client_socket, dfs_cm_client_req_t request)
         blockNode.block_id = next_data_node_index;
         memcpy(&blockNode.loc_ip, dnlist[next_data_node_index%dncnt]->ip, sizeof(dnlist[next_data_node_index%dncnt]->ip));
         blockNode.loc_port = dnlist[next_data_node_index%dncnt]->port;
-        printf("LOC_PORT: %d %d %d\n", blockNode.loc_port, next_data_node_index%dncnt, dnlist[0]->port);
+//        printf("LOC_PORT: %d %d %d\n", blockNode.loc_port, next_data_node_index%dncnt, dnlist[0]->port);
         memcpy(&(*file_image)->block_list[next_data_node_index], &blockNode, sizeof(blockNode));
     }
 
