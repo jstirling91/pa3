@@ -96,7 +96,7 @@ int register_datanode(int heartbeat_socket)
             dnode.port = datanode_status.datanode_listen_port;
             dncnt++;
             dnlist[n - 1] = &dnode;
-            printf("HERE %d\n", dnlist[n-1].dn_id);
+            printf("HERE %d\n", dnlist[n-1]->dn_id);
 			safeMode = 0;
 		}
 		close(datanode_socket);
