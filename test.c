@@ -37,7 +37,9 @@ int test_case_1(char **argv, int op_type)
 	memset(buf, 0, DFS_BLOCK_SIZE);
 	memset(local_buf, 0, DFS_BLOCK_SIZE);
 	fread(buf, DFS_BLOCK_SIZE, 1, fp);
+    printf("\n\n%s\n\n", buf);
 	fread(local_buf, DFS_BLOCK_SIZE, 1, local_fp);
+    printf("\n\n%s\n\n", local_buf);
 	if (memcmp(local_buf, buf, DFS_BLOCK_SIZE) != 0) 
 	{
 		ret = 1;
