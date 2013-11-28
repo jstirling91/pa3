@@ -98,7 +98,7 @@ int register_datanode(int heartbeat_socket)
 //                strcpy(dnode.ip, inet_ntoa(serv_addr.sin_addr));
 //                //            dnode.ip = *inet_ntoa(addr.sin_addr);
 //                dnode.port = datanode_status.datanode_listen_port;
-//                dncnt++;
+                dncnt++;
 //                dnlist[n - 1] = &dnode;
                 
                 dfs_datanode_t *newDatanode = malloc(sizeof(dfs_datanode_t));
