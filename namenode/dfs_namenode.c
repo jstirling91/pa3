@@ -30,7 +30,9 @@ int mainLoop(int server_socket)
 		//TODO: receive requests from client and fill it in request
         char *data = (char *)malloc(sizeof(request));
 //        char data[300];
+        printf("Attempting to recieve data\n");
         receive_data(client_socket, &request, sizeof(request));
+        printf("Data received\n");
 //        memcpy(&request, data, sizeof(request));
         
 		requests_dispatcher(client_socket, request);
