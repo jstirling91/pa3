@@ -24,6 +24,7 @@ int test_case_1(char **argv, int op_type)
 		return 1;
 	}
 	int ret = 0;
+    printf("here\n");
 	char * str_arr[1];
 	char *blk_0 = "d1/local_file_blk_0";
 	FILE *local_fp = fopen("local_file", "rb");
@@ -41,7 +42,6 @@ int test_case_1(char **argv, int op_type)
 //    printf("\n\n%s\n\n", local_buf);
 	if (memcmp(local_buf, buf, DFS_BLOCK_SIZE) != 0)
 	{
-        printf("here\n");
 		ret = 1;
 	}
 	fclose(fp);
