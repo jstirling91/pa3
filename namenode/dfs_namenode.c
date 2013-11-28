@@ -157,7 +157,7 @@ int get_file_receivers(int client_socket, dfs_cm_client_req_t request)
 	dfs_cm_file_res_t response;
 	memset(&response, 0, sizeof(response));
 	//TODO: fill the response and send it back to the client
-    memcpy(&response->query_result, *file_image, sizeof(dfs_cm_file_t));
+    memcpy(&response.query_result, *file_image, sizeof(dfs_cm_file_t));
     send_data(client_socket, &response, sizeof(dfs_cm_file_res_t));
 
 	return 0;
