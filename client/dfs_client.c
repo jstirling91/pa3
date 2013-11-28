@@ -84,7 +84,7 @@ int pull_file(int namenode_socket, const char *filename)
 	//TODO: fill the request, and send
 	dfs_cm_client_req_t request;
     request.req_type = 0;
-    memcpy(request.file_name, local_path, sizeof(request.file_name));
+    memcpy(request.file_name, filename, sizeof(request.file_name));
     send_data(namenode_socket, &request, sizeof(request));
     printf("SUCCESS: pull_file request was sent\n");
 
