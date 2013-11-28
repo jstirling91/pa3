@@ -94,7 +94,7 @@ int register_datanode(int heartbeat_socket)
             dfs_datanode_t dnode;
             dnode.dn_id = n;
             strcpy(dnode.ip, inet_ntoa(serv_addr.sin_addr));
-//            dnode.ip = *inet_ntoa(addr.sin_addr);
+            dnode.ip = *inet_ntoa(addr.sin_addr);
             dnode.port = datanode_status.datanode_listen_port;
             dncnt++;
             dnlist[n - 1] = &dnode;
@@ -154,7 +154,7 @@ int get_file_receivers(int client_socket, dfs_cm_client_req_t request)
         blockNode.block_id = next_data_node_index;
         memcpy(&blockNode.loc_ip, dnlist[next_data_node_index%dncnt]->ip, sizeof(dnlist[next_data_node_index%dncnt]->ip));
         blockNode.loc_port = dnlist[next_data_node_index%dncnt]->port;
-//        printf("LOC_PORT: %d %d %d\n", blockNode.loc_port, next_data_node_index%dncnt, dnlist[0]->port);
+        printf("LOC_PORT: %d %d %d\n", blockNode.loc_port, next_data_node_index%dncnt, dnlist[0]->port);
         memcpy(&(*file_image)->block_list[next_data_node_index], &blockNode, sizeof(blockNode));
     }
 
