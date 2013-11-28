@@ -91,19 +91,20 @@ int register_datanode(int heartbeat_socket)
 		{
 			//TODO: fill dnlist
 			//principle: a datanode with id of n should be filled in dnlist[n - 1] (n is always larger than 0)
-            dfs_datanode_t dnode;
+            
             if(dnlist[n - 1] == NULL){
-                
-                dnode.dn_id = n;
-                strcpy(dnode.ip, inet_ntoa(serv_addr.sin_addr));
+                dfs_datanode_t *dnode = malloc(sizeof(dfs_datanode_t));
+                dnode->dn_id = n;
+                memcpy(dnode->ip, inet_ntoa(serv_addr.sin_addr), sizeof(inet_ntoa(serv_addr.sin_addr)));
                 //            dnode.ip = *inet_ntoa(addr.sin_addr);
-                dnode.port = datanode_status.datanode_listen_port;
+                dnode->port = datanode_status.datanode_listen_port;
                 dncnt++;
-                dnlist[n - 1] = &dnode;
+                dnlist[n - 1] = dnode;
                 if(n == 2){
                     printf("PORT1: %d, %d\n", dnlist[n - 1]->port, dnlist[0]->port);
                 }
                 printf("PORT: %d, %d\n", dnlist[n - 1]->port, n);
+                free(dnode);
                 safeMode = 0;
             }
 		}
