@@ -56,10 +56,10 @@ typedef struct _file_descriptor_
 	char filename[256];
 	dfs_cm_block_t block_list[MAX_FILE_BLK_COUNT];
 	int file_size;
-	int blocknum;
+	int blocknum;o
 }dfs_cm_file_t;
 
-typedef struct d
+typedef struct _system_descriptor_
 {
 	int datanode_num;
 	dfs_datanode_t datanodes[MAX_FILE_BLK_COUNT];		

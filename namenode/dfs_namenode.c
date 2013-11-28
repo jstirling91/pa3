@@ -30,8 +30,8 @@ int mainLoop(int server_socket)
 		//TODO: receive requests from client and fill it in request
         char *data = (char *)malloc(sizeof(request));
 //        char data[300];
-        receive_data(client_socket, (void *)data, sizeof(request));
-        memcpy(&request, data, sizeof(request));
+        receive_data(client_socket, &request, sizeof(request));
+//        memcpy(&request, data, sizeof(request));
         
 		requests_dispatcher(client_socket, request);
 		close(client_socket);
@@ -132,7 +132,7 @@ int get_file_receivers(int client_socket, dfs_cm_client_req_t request)
 		// Create the file entry
 		*file_image = (dfs_cm_file_t*)malloc(sizeof(dfs_cm_file_t));
 		memset(*file_image, 0, sizeof(**file_image));
-		strcpy((*file_image)->filename, request.file_name);
+		memcpy((*file_image)->filename, request.file_name, sizeof(request.file_name));
 		(*file_image)->file_size = request.file_size;
 		(*file_image)->blocknum = 0;
 	}
@@ -144,10 +144,21 @@ int get_file_receivers(int client_socket, dfs_cm_client_req_t request)
 	int next_data_node_index = 0;
 
 	//TODO:Assign data blocks to datanodes, round-robin style (see the Documents)
+    for(next_data_node_index = first_unassigned_block_index; next_data_node_index < block_count; next_data_node_index++){
+        dfs_cm_block_t blockNode;
+        memcpy(&blockNode.owner_name, &request.file_name, sizeof(request.file_name));
+        blockNode.dn_id = next_data_node_index % dncnt;
+        blockNode.block_id = next_data_node_index;
+        memcpy(&blockNode.loc_ip, dnlist[next_data_node_index%dncnt]->ip, sizeof(dnlist[next_data_node_index%dncnt]->ip));
+        blockNode.loc_port = dnlist[next_data_node_index%dncnt]->port;
+        (*file_name)->block_list[i] = &blockNode;
+    }
 
 	dfs_cm_file_res_t response;
 	memset(&response, 0, sizeof(response));
 	//TODO: fill the response and send it back to the client
+    memcpy(&response->query_result, *file_image, sizeof(dfs_cm_file_t));
+    send_data(client_socket, &response, sizeof(dfs_cm_file_res_t));
 
 	return 0;
 }
