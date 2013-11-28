@@ -345,8 +345,8 @@ int main(int argc, char **argv)
 	printf("TEST CASE 6:%s\n", result[test_case_6(argv, 0)]);
 	//check every file is stored correctly
 	printf("TEST CASE 7:%s\n", result[test_case_7(argv)]);
-//	//modify the file
-//	append_data("local_file", 1024);
-//	printf("TEST CASE 8:%s\n", result[test_case_8(argv, 3)]);
+	//modify the file
+	append_data("local_file", 1024);
+	printf("TEST CASE 8:%s\n", result[test_case_8(argv, 3)]);
 	return 0;
 }
