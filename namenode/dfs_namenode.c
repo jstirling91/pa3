@@ -96,16 +96,9 @@ int register_datanode(int heartbeat_socket)
                 dfs_datanode_t *dnode = malloc(sizeof(dfs_datanode_t));
                 dnode->dn_id = n;
                 memcpy(&dnode->ip, inet_ntoa(serv_addr.sin_addr), 16*sizeof(char));
-//                //            dnode.ip = *inet_ntoa(addr.sin_addr);
                 dnode->port = datanode_status.datanode_listen_port;
                 dncnt++;
                 dnlist[n - 1] = dnode;
-                
-//                dfs_datanode_t *newDatanode = malloc(sizeof(dfs_datanode_t));
-//                newDatanode->dn_id = datanode_status.datanode_id;
-//                memcpy(&newDatanode->ip, inet_ntoa(serv_addr.sin_addr), 16*sizeof(char));
-//                newDatanode->port = datanode_status.datanode_listen_port;
-//                dnlist[datanode_status.datanode_id - 1] = newDatanode;
                 
                 if(n == 2){
                     printf("PORT1: %d, %d\n", dnlist[n - 1]->port, dnlist[0]->port);
@@ -191,7 +184,9 @@ int get_file_location(int client_socket, dfs_cm_client_req_t request)
 		if (strcmp(file_image->filename, request.file_name) != 0) continue;
 		dfs_cm_file_res_t response;
 		//TODO: fill the response and send it back to the client
-
+        response.query_result = *file_image;
+        send_data(client_socket, &response, sizeof(dfs_cm_file_res_t));
+        
 		return 0;
 	}
 	//FILE NOT FOUND
@@ -205,14 +200,13 @@ void get_system_information(int client_socket, dfs_cm_client_req_t request)
 	dfs_system_status response;
     response.datanode_num = dncnt;
     int i;
-    for(i = 0; i < dncnt; i++){
-//        response.datanodes[i] = *(dnlist[i]);
-    }
-//    char *data = (char*)malloc(sizeof(dfs_system_status));
-//    memcpy(, sizeof(dfs_system_status));
-//    char string[13] = "Hello World";
+//    for(i = 0; i < dncnt; i++){
+////        response.datanodes[i] = *(dnlist[i]);
+//    }
+    char *data = (char*)malloc(sizeof(dfs_system_status));
+    memcpy(, sizeof(dfs_system_status));
+    char string[13] = "Hello World";
     send_data(client_socket, &response, sizeof(dfs_system_status));
-//    free(data);
 }
 
 int get_file_update_point(int client_socket, dfs_cm_client_req_t request)
