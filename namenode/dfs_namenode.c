@@ -106,7 +106,7 @@ int register_datanode(int heartbeat_socket)
 int get_file_receivers(int client_socket, dfs_cm_client_req_t request)
 {
 	printf("Responding to request for block assignment of file '%s'!\n", request.file_name);
-
+    printf("HERE\n");
 	dfs_cm_file_t** end_file_image = file_images + MAX_FILE_COUNT;
 	dfs_cm_file_t** file_image = file_images;
 	
@@ -132,7 +132,9 @@ int get_file_receivers(int client_socket, dfs_cm_client_req_t request)
 		*file_image = (dfs_cm_file_t*)malloc(sizeof(dfs_cm_file_t));
 		memset(*file_image, 0, sizeof(**file_image));
 		memcpy((*file_image)->filename, request.file_name, sizeof(request.file_name));
+        printf("HERE1\n");
 		(*file_image)->file_size = request.file_size;
+        printf("HERE2\n");
 		(*file_image)->blocknum = 0;
 	}
 	
@@ -143,7 +145,7 @@ int get_file_receivers(int client_socket, dfs_cm_client_req_t request)
 	int next_data_node_index = 0;
 
 	//TODO:Assign data blocks to datanodes, round-robin style (see the Documents)
-    printf("HERE\n");
+    
     for(next_data_node_index = first_unassigned_block_index; next_data_node_index < block_count; next_data_node_index++){
         dfs_cm_block_t blockNode;
         memcpy(&blockNode.owner_name, &request.file_name, sizeof(request.file_name));
