@@ -153,7 +153,7 @@ int get_file_receivers(int client_socket, dfs_cm_client_req_t request)
         blockNode.dn_id = next_data_node_index % dncnt;
         blockNode.block_id = next_data_node_index;
         memcpy(&blockNode.loc_ip, dnlist[next_data_node_index%dncnt]->ip, sizeof(dnlist[next_data_node_index%dncnt]->ip));
-        printf("LOC_PORT1: %d %d %d\n", dnlist[0]->port, next_data_node_index%dncnt, dnlist[1]->port);
+: %d %d %d\n", dnlist[0]->port, next_data_node_index%dncnt, dnlist[1]->port);
         blockNode.loc_port = dnlist[next_data_node_index%dncnt]->port;
         printf("LOC_PORT: %d %d %d\n", blockNode.loc_port, next_data_node_index%dncnt, dnlist[1]->port);
         memcpy(&(*file_image)->block_list[next_data_node_index], &blockNode, sizeof(blockNode));
@@ -193,7 +193,7 @@ void get_system_information(int client_socket, dfs_cm_client_req_t request)
     response.datanode_num = dncnt;
     int i;
     for(i = 0; i < dncnt; i++){
-        response.datanodes[i] = *(dnlist[i]);
+//        response.datanodes[i] = *(dnlist[i]);
     }
 //    char *data = (char*)malloc(sizeof(dfs_system_status));
 //    memcpy(, sizeof(dfs_system_status));
