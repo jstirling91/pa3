@@ -96,6 +96,7 @@ int register_datanode(int heartbeat_socket)
             strcpy(dnode.ip, inet_ntoa(serv_addr.sin_addr));
 //            dnode.ip = *inet_ntoa(addr.sin_addr);
             dnode.port = datanode_status.datanode_listen_port;
+            printf("PORT: %d, %d\n", dnode.port, n - 1);
             dncnt++;
             dnlist[n - 1] = &dnode;
 			safeMode = 0;
