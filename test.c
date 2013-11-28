@@ -21,6 +21,7 @@ int test_case_1(char **argv, int op_type)
 {
 	if (send_file_request(argv, "local_file", 1) == -1) 
 	{
+        printf("here\n");
 		return 1;
 	}
 	int ret = 0;
