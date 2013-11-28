@@ -95,7 +95,7 @@ int register_datanode(int heartbeat_socket)
             if(dnlist[n - 1] == NULL){
                 dfs_datanode_t *dnode;
                 dnode->dn_id = n;
-                memcpy(&dnode->ip, inet_ntoa(serv_addr.sin_addr), sizeof(inet_ntoa(serv_addr.sin_addr)));
+                memcpy(&dnode->ip, inet_ntoa(serv_addr.sin_addr), 16*sizeof(char));
 //                //            dnode.ip = *inet_ntoa(addr.sin_addr);
                 dnode->port = datanode_status.datanode_listen_port;
                 dncnt++;
