@@ -33,7 +33,6 @@ int test_case_1(char **argv, int op_type)
 	str_arr[0] = blk_0;
 	FILE *fp = fopen(str_arr[0], "rb");
 	if (fp == NULL) return 1;
-    printf("here\n");
 	memset(buf, 0, DFS_BLOCK_SIZE);
 	memset(local_buf, 0, DFS_BLOCK_SIZE);
 	fread(buf, DFS_BLOCK_SIZE, 1, fp);
