@@ -46,7 +46,7 @@ int push_file(int namenode_socket, const char* local_path)
     memcpy(request.file_name, local_path, sizeof(request.file_name));
     fseek(file, 0, SEEK_END);
     int size = ftell(file);
-    fseek(file, 0, SEEK_SET);
+    fseek(file, SEEK_SET, 0);
     request.file_size = size;
     send_data(namenode_socket, &request, sizeof(request));
     printf("SUCCESS: push_file request was sent\n");
@@ -64,7 +64,7 @@ int push_file(int namenode_socket, const char* local_path)
         dataReq.op_type = 1;
         memcpy(&dataReq.block, &response.query_result.block_list[i], sizeof(response.query_result.block_list[i]));
         char *temp = malloc(DFS_BLOCK_SIZE);
-        fread(temp, DFS_BLOCK_SIZE, 1, file);
+        fread(temp, 1, DFS_BLOCK_SIZE, file);
         printf("CONTENT: %s\n", temp);
         memcpy(&dataReq.block.content, temp, sizeof(temp));
         dataSocket = connect_to_nn(dataReq.block.loc_ip, dataReq.block.loc_port);
