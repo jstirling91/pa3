@@ -96,7 +96,6 @@ int register_datanode(int heartbeat_socket)
             dnode.port = datanode_status.datanode_listen_port;
             dncnt++;
             dnlist[n - 1] = &dnode;
-            printf("HERE %d\n", dnlist[n-1]->dn_id);
 			safeMode = 0;
 		}
 		close(datanode_socket);
@@ -144,6 +143,7 @@ int get_file_receivers(int client_socket, dfs_cm_client_req_t request)
 	int next_data_node_index = 0;
 
 	//TODO:Assign data blocks to datanodes, round-robin style (see the Documents)
+    printf("HERE\n");
     for(next_data_node_index = first_unassigned_block_index; next_data_node_index < block_count; next_data_node_index++){
         dfs_cm_block_t blockNode;
         memcpy(&blockNode.owner_name, &request.file_name, sizeof(request.file_name));
