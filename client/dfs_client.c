@@ -63,9 +63,9 @@ int push_file(int namenode_socket, const char* local_path)
         dfs_cli_dn_req_t dataReq;
         dataReq.op_type = 1;
         memcpy(&dataReq.block, &response.query_result.block_list[i], sizeof(response.query_result.block_list[i]));
-        char *temp = malloc(DFS_BLOCK_SIZE);
-        fread(temp, DFS_BLOCK_SIZE, 1, file);
-        memcpy(&dataReq.block.content, temp, sizeof(temp));
+//        char *temp = malloc(DFS_BLOCK_SIZE);
+        fread(&dataReq.block.content, DFS_BLOCK_SIZE, 1, file);
+//        memcpy(&dataReq.block.content, temp, sizeof(temp));
         dataSocket = connect_to_nn(dataReq.block.loc_ip, dataReq.block.loc_port);
         printf("%s %d\n%s\n", dataReq.block.owner_name, dataReq.block.block_id, dataReq.block.content);
         send_data(dataSocket, &dataReq, sizeof(dataReq));
