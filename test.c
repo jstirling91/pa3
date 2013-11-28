@@ -21,7 +21,6 @@ int test_case_1(char **argv, int op_type)
 {
 	if (send_file_request(argv, "local_file", 1) == -1) 
 	{
-        printf("here\n");
 		return 1;
 	}
 	int ret = 0;
@@ -39,9 +38,10 @@ int test_case_1(char **argv, int op_type)
 	fread(buf, DFS_BLOCK_SIZE, 1, fp);
 //    printf("\n\n%s\n\n", buf);
 	fread(local_buf, DFS_BLOCK_SIZE, 1, local_fp);
-    printf("\n\n%s\n\n", local_buf);
-	if (memcmp(local_buf, buf, DFS_BLOCK_SIZE) != 0) 
+//    printf("\n\n%s\n\n", local_buf);
+	if (memcmp(local_buf, buf, DFS_BLOCK_SIZE) != 0)
 	{
+        printf("here\n");
 		ret = 1;
 	}
 	fclose(fp);
