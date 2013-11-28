@@ -38,12 +38,12 @@ int modify_file(char *ip, int port, const char* filename, int file_size, int sta
         endBlock = end_addr / DFS_BLOCK_SIZE;
     }
     else{
-        endBlock = = response.query_result.blocknum;
+        endBlock = response.query_result.blocknum;
     }
     for(startBlock; startBlock < endBlock; startBlock++){
         dfs_cli_dn_req_t dataReq;
         dataReq.op_type = 1;
-        memcpy(&dataReq.block, &response.query_result.block_list[startBlock], sizeof(response.query_result.block_list[i]));
+        memcpy(&dataReq.block, &response.query_result.block_list[startBlock], sizeof(response.query_result.block_list[startBlock]));
         //        char *temp = malloc(DFS_BLOCK_SIZE);
         fread(&dataReq.block.content, DFS_BLOCK_SIZE, 1, file);
         //        memcpy(&dataReq.block.content, temp, sizeof(temp));
