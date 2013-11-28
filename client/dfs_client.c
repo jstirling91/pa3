@@ -32,7 +32,7 @@ int modify_file(char *ip, int port, const char* filename, int file_size, int sta
     
 
 	//TODO: send the updated block to the proper datanode
-    int startBlock = start_addr / DFS_BLOCK_SIZE;
+    int startBlock = (start_addr / DFS_BLOCK_SIZE) - 1;
     int endBlock;
     int dataSocket;
     if(file_size == response.query_result.file_size){
