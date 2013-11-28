@@ -29,7 +29,7 @@ int mainLoop()
 		assert(client_socket != INVALID_SOCKET);
 		dfs_cli_dn_req_t request;
 		//TODO: receive data from client_socket, and fill it to request
-        receive_data(client_socket, &request, sizeof(request));
+        receive_data(client_socket, &request, sizeof(dfs_cli_dn_req_t));
 		requests_dispatcher(client_socket, request);
 		close(client_socket);
 	}
