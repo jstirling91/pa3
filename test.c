@@ -269,7 +269,7 @@ int test_case_8(char **argv, int op_type)
 	for (; i < 2; i++) {
 		FILE *fp = fopen(str_arr[i], "rb");
 		if (fp == NULL){
-            printf("HERE\n");
+            printf("HERE %s\n", str_arr[i]);
             return 1;
         }
 		memset(buf, 0, DFS_BLOCK_SIZE);
