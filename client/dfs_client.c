@@ -97,7 +97,7 @@ int pull_file(int namenode_socket, const char *filename)
     int i;
     int dataSocket;
     int fileSize = response.query_result.file_size;
-    (char *)buf = malloc(fileSize);
+    char *buf = malloc(fileSize);
     int cursor = 0;
     for(i = 0; i < response.query_result.blocknum; i++){
         dfs_cli_dn_req_t dataReq;
