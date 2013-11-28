@@ -338,7 +338,7 @@ int main(int argc, char **argv)
 	//can contact to two datanodes
 	generate_data("local_file_medium", 4096);
 	printf("TEST CASE 3:%s\n", result[test_case_3(argv, 1)]);
-//	printf("TEST CASE 4:%s\n", result[test_case_4(argv, 0)]);
+	printf("TEST CASE 4:%s\n", result[test_case_4(argv, 0)]);
 //	//can handle chunk pieces
 //	generate_data("local_file_large", 8192);
 //	printf("TEST CASE 5:%s\n", result[test_case_5(argv, 1)]);
