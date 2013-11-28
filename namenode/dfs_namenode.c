@@ -208,22 +208,25 @@ void get_system_information(int client_socket, dfs_cm_client_req_t request)
 
 int get_file_update_point(int client_socket, dfs_cm_client_req_t request)
 {
-	int i = 0;
-	for (i = 0; i < MAX_FILE_COUNT; ++i)
-	{
-		dfs_cm_file_t* file_image = file_images[i];
-		if (file_image == NULL) continue;
-		if (strcmp(file_image->filename, request.file_name) != 0) continue;
-		dfs_cm_file_res_t response;
-		//TODO: fill the response and send it back to the client
-		// Send back the data block assignments to the client
-		memset(&response, 0, sizeof(response));
-		//TODO: fill the response and send it back to the client
-        response.query_result = *file_image;
-        printf("HEREEREERREREREERERER\n");
-        send_data(client_socket, &response, sizeof(dfs_cm_file_res_t));
-		return 0;
-	}
+//	int i = 0;
+//	for (i = 0; i < MAX_FILE_COUNT; ++i)
+//	{
+//		dfs_cm_file_t* file_image = file_images[i];
+//		if (file_image == NULL) continue;
+//		if (strcmp(file_image->filename, request.file_name) != 0) continue;
+//		dfs_cm_file_res_t response;
+//		//TODO: fill the response and send it back to the client
+//		// Send back the data block assignments to the client
+//		memset(&response, 0, sizeof(response));
+//		//TODO: fill the response and send it back to the client
+//        response.query_result = *file_image;
+//        printf("HEREEREERREREREERERER\n");
+//        send_data(client_socket, &response, sizeof(dfs_cm_file_res_t));
+//		return 0;
+//	}
+    if (get_file_receivers(client_socket, request) == 0){
+        return 0;
+    }
 	//FILE NOT FOUND
 	return 1;
 }
