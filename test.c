@@ -10,7 +10,6 @@ int test_case_0(char **argv, int op_type)
 	if ((sys_stat = send_sysinfo_request(argv)) == NULL) return 1;
 	if (sys_stat->datanode_num == 2)
 	{
-        printf("HERE\n");
 		free(sys_stat);
 		return 0;
 	}
@@ -333,7 +332,8 @@ int main(int argc, char **argv)
 	//generate data
 	//can contact to single datanode
 	generate_data("local_file", 1024);
-	printf("TEST CASE 1:%s\n", result[test_case_1(argv, 1)]);
+    int i = test_case_1(argv, 1);
+	printf("TEST CASE 1:%s\n", result[i]);
 //	printf("TEST CASE 2:%s\n", result[test_case_2(argv, 0)]);
 //	//can contact to two datanodes	
 //	generate_data("local_file_medium", 4096);
