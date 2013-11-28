@@ -59,7 +59,7 @@ int push_file(int namenode_socket, const char* local_path)
 	//TODO: Send blocks to datanodes one by one
     int i;
     int dataSocket;
-    for(i = 0; i < response.query_result.block_num; i++){
+    for(i = 0; i < response.query_result.blocknum; i++){
         dfs_cli_dn_req_t dataReq;
         dataReq.op_type = 1;
         memcpy(&dataReq.block, &response.query_result.block_list[i], sizeof(response.query_result.block_list[i]));
