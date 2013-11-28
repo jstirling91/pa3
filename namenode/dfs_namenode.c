@@ -29,9 +29,7 @@ int mainLoop(int server_socket)
 		dfs_cm_client_req_t request;
 		//TODO: receive requests from client and fill it in request
         char *data = (char *)malloc(sizeof(request));
-        printf("Attempting to recieve data\n");
         receive_data(client_socket, &request, sizeof(request));
-        printf("Data received %d\n", request.req_type);
         
 		requests_dispatcher(client_socket, request);
 		close(client_socket);

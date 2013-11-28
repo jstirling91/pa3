@@ -76,12 +76,10 @@ int push_file(int namenode_socket, const char* local_path)
     rewind(file);
     request.file_size = size;
     send_data(namenode_socket, &request, sizeof(request));
-    printf("SUCCESS: push_file request was sent\n");
 	
 	//TODO:Receive the response
 	dfs_cm_file_res_t response;
     receive_data(namenode_socket, &response, sizeof(response));
-    printf("SUCCESS: got push_file response\n");
 
 	//TODO: Send blocks to datanodes one by one
     int i;
@@ -95,7 +93,6 @@ int push_file(int namenode_socket, const char* local_path)
         send_data(dataSocket, &dataReq, sizeof(dataReq));
         close(dataSocket);
     }
-    printf("SUCCESS: push_file data was sent\n");
 
 	fclose(file);
 	return 0;
@@ -111,12 +108,10 @@ int pull_file(int namenode_socket, const char *filename)
     request.req_type = 0;
     memcpy(request.file_name, filename, sizeof(request.file_name));
     send_data(namenode_socket, &request, sizeof(request));
-    printf("SUCCESS: pull_file request was sent\n");
 
 	//TODO: Get the response
 	dfs_cm_file_res_t response;
     receive_data(namenode_socket, &response, sizeof(response));
-    printf("SUCCESS: got pull_file response\n");
 	
 	//TODO: Receive blocks from datanodes one by one
     int i;
@@ -130,7 +125,6 @@ int pull_file(int namenode_socket, const char *filename)
         memcpy(&dataReq.block, &response.query_result.block_list[i], sizeof(response.query_result.block_list[i]));
         dataSocket = connect_to_nn(dataReq.block.loc_ip, dataReq.block.loc_port);
         send_data(dataSocket, &dataReq, sizeof(dataReq));
-        printf("SUCCESS: pull_file data request sent\n");
         
         dfs_cm_block_t dataRes;
         receive_data(dataSocket, &dataRes, sizeof(dfs_cm_block_t));
@@ -153,13 +147,11 @@ dfs_system_status *get_system_info(int namenode_socket)
 	dfs_cm_client_req_t request;
     request.req_type = 2;
     send_data(namenode_socket, &request, sizeof(request));
-    printf("SUCCESS: get_system_info request was sent\n");
     
 	//TODO: get the response
 	dfs_system_status *response = malloc(sizeof(dfs_system_status));
     receive_data(namenode_socket, response, sizeof(dfs_system_status));
     
-    printf("SUCCESS: got get_system_info response\n");
 	return response;
 }
 

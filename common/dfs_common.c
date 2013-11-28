@@ -12,12 +12,7 @@ inline pthread_t * create_thread(void * (*entry_point)(void*), void *args)
 	pthread_t * thread;
     thread = (pthread_t *)malloc(sizeof(pthread_t));
     int rc = pthread_create(thread, NULL, entry_point, args);
-    if(rc){
-        printf("ERROR: threated not created\n");
-    }
-    else{
-        printf("SUCCESS: thread created\n");
-    }
+    
 	return thread;
 }
 
@@ -29,7 +24,6 @@ int create_tcp_socket()
 	//TODO:create the socket and return the file descriptor
     int client_socket = -1;
     if((client_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0){
-        printf("ERROR: could not create socket\n");
         return -1;
     }
 	return client_socket;
@@ -44,16 +38,13 @@ int create_client_tcp_socket(char* address, int port)
 	assert(port >= 0 && port < 65536);
 	int socket = create_tcp_socket();
 	if (socket == INVALID_SOCKET) return 1;
-    printf("SUCCESS: created client socket\n");
     struct sockaddr_in serv_addr;
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_port = htons(port);
     serv_addr.sin_addr.s_addr = inet_addr(address);
     if(connect(socket, (struct sockaddr *)&serv_addr, sizeof(serv_addr))<0){
-        printf("ERROR: could not connect to server at port %d\n", port);
         return -1;
     }
-    printf("SUCCESS: connected to server WITH PORT: %d\n", port);
 	return socket;
 }
 
@@ -66,17 +57,14 @@ int create_server_tcp_socket(int port)
 	int socket = create_tcp_socket();
 	if (socket == INVALID_SOCKET) return 1;
 	//TODO: listen on local port
-    printf("SUCCESS: created server socket\n");
     struct sockaddr_in serv_addr;
     serv_addr.sin_family = AF_INET;
     serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);
     serv_addr.sin_port = htons(port);
     bind(socket, (struct sockaddr*)&serv_addr,sizeof(serv_addr));
     if(listen(socket, 10) == -1){
-        printf("Failed to listen\n");
         return -1;
     }
-    printf("SUCCESS: listening for client\n");
 	return socket;
 }
 
@@ -96,13 +84,10 @@ void send_data(int socket, void* data, int size)
     while(bytesWrite < size){
         result = write(socket, data + bytesWrite, size);
         if(result < 1){
-            printf("ERROR: did not send\n");
             return;
         }
         bytesWrite += result;
     }
-//
-    printf("SUCCESS: data was sent\n");
 
 }
 
@@ -126,11 +111,9 @@ void receive_data(int socket, void* data, int size)
         if (result < 1 )
         {
             // Throw your error.
-            printf("ERROR: did not read socket %d\n", socket);
             return;
         }
         
         bytesRead += result;
     }
-    printf("SUCCESS: read from socket %d\n", socket);
 }
