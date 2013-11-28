@@ -27,13 +27,13 @@ int test_case_1(char **argv, int op_type)
 	char * str_arr[1];
 	char *blk_0 = "d1/local_file_blk_0";
 	FILE *local_fp = fopen("local_file", "rb");
-    printf("here\n");
 	char *local_buf = (char *) malloc(sizeof(char) * DFS_BLOCK_SIZE);
 	char *buf = (char *) malloc(sizeof(char) * DFS_BLOCK_SIZE);
 	sleep(5);
 	str_arr[0] = blk_0;
 	FILE *fp = fopen(str_arr[0], "rb");
 	if (fp == NULL) return 1;
+    printf("here\n");
 	memset(buf, 0, DFS_BLOCK_SIZE);
 	memset(local_buf, 0, DFS_BLOCK_SIZE);
 	fread(buf, DFS_BLOCK_SIZE, 1, fp);
