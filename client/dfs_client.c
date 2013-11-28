@@ -23,6 +23,7 @@ int modify_file(char *ip, int port, const char* filename, int file_size, int sta
 	dfs_cm_client_req_t request;
     request.req_type = 3;
     memcpy(request.file_name, filename, sizeof(request.file_name));
+    request.file_size = file_size;
     send_data(namenode_socket, &request, sizeof(request));
     
 	
