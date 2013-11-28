@@ -93,19 +93,19 @@ int register_datanode(int heartbeat_socket)
 			//principle: a datanode with id of n should be filled in dnlist[n - 1] (n is always larger than 0)
             
             if(dnlist[n - 1] == NULL){
-//                dfs_datanode_t dnode;
-//                dnode.dn_id = n;
-//                strcpy(dnode.ip, inet_ntoa(serv_addr.sin_addr));
+                dfs_datanode_t *dnode;
+                dnode->dn_id = n;
+                memcpy(&dnodeip->ip, inet_ntoa(serv_addr.sin_addr), sizeof(inet_ntoa(serv_addr.sin_addr)));
 //                //            dnode.ip = *inet_ntoa(addr.sin_addr);
-//                dnode.port = datanode_status.datanode_listen_port;
+                dnode->port = datanode_status.datanode_listen_port;
                 dncnt++;
-//                dnlist[n - 1] = &dnode;
+                dnlist[n - 1] = dnode;
                 
-                dfs_datanode_t *newDatanode = malloc(sizeof(dfs_datanode_t));
-                newDatanode->dn_id = datanode_status.datanode_id;
-                memcpy(&newDatanode->ip, inet_ntoa(serv_addr.sin_addr), 16*sizeof(char));
-                newDatanode->port = datanode_status.datanode_listen_port;
-                dnlist[datanode_status.datanode_id - 1] = newDatanode;
+//                dfs_datanode_t *newDatanode = malloc(sizeof(dfs_datanode_t));
+//                newDatanode->dn_id = datanode_status.datanode_id;
+//                memcpy(&newDatanode->ip, inet_ntoa(serv_addr.sin_addr), 16*sizeof(char));
+//                newDatanode->port = datanode_status.datanode_listen_port;
+//                dnlist[datanode_status.datanode_id - 1] = newDatanode;
                 
                 if(n == 2){
                     printf("PORT1: %d, %d\n", dnlist[n - 1]->port, dnlist[0]->port);
