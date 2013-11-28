@@ -64,7 +64,7 @@ int push_file(int namenode_socket, const char* local_path)
         dataReq.op_type = 1;
         memcpy(&dataReq.block, &response.query_result.block_list[i], sizeof(response.query_result.block_list[i]));
         char *temp = malloc(DFS_BLOCK_SIZE);
-        fread(temp, 1, DFS_BLOCK_SIZE, file);
+        fread(temp, DFS_BLOCK_SIZE, 1, file);
         printf("CONTENT: %s\n", temp);
         memcpy(&dataReq.block.content, temp, sizeof(temp));
         dataSocket = connect_to_nn(dataReq.block.loc_ip, dataReq.block.loc_port);
