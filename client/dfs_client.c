@@ -44,7 +44,7 @@ int modify_file(char *ip, int port, const char* filename, int file_size, int sta
     for(startBlock; startBlock < endBlock; startBlock++){
         dfs_cli_dn_req_t dataReq;
         dataReq.op_type = 1;
-        memcpy(&dataReq.block, &response.query_result.block_list[startBlock], sizeof(response.query_result.block_list[startBlock]));
+        memcpy(&dataReq.block, &response.query_result.block_list[startBlock], sizeof(dfs_cli_dn_req_t));
         //        char *temp = malloc(DFS_BLOCK_SIZE);
         fread(&dataReq.block.content, DFS_BLOCK_SIZE, 1, file);
         //        memcpy(&dataReq.block.content, temp, sizeof(temp));

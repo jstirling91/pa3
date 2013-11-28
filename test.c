@@ -260,6 +260,7 @@ int test_case_8(char **argv, int op_type)
 	char *buf = (char *) malloc(sizeof(char) * DFS_BLOCK_SIZE);
 	if (modify_file(argv[1], atoi(argv[2]), "local_file", 2048, 1024, 2047) == -1) 
 	{
+        printf("HERE\n");
 		fclose(local_fp);
 		return 1; 
 	}
